@@ -29,4 +29,4 @@ calculateNewB :: Tensor -> Tensor -> Tensor -> Tensor -> Tensor
 calculateNewB x y slope intercept =
     let predicatedValues = linear (slope, intercept) x
         diff = sub predicatedValues y
-    in mean (2 * diff * x)
+    in mean (2 * diff)

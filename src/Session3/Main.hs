@@ -11,8 +11,8 @@ import Session3.LinearRegression
 main :: IO ()
 main = do
   putStrLn "--- Initial Values ---"
-  let initialA = asTensor(0.555:: Float)
-  let initialB = asTensor(94.585026 :: Float)
+  let initialA = asTensor(0.00:: Float)
+  let initialB = asTensor(0.00 :: Float)
   let initialCost = cost ys (linear (initialA, initialB) xs)
   let xsList = asValue xs :: [Float]
   let ysList = asValue ys :: [Float]
@@ -20,7 +20,7 @@ main = do
   putStrLn "--- Starting Training ---"
 
   let learningRate = asTensor(28e-6 :: Float) -- ** Adjust this value **
-  let numEpochs = 15000 :: Int;
+  let numEpochs = 1000000 :: Int;
   mapM_
     ( \(x,y) -> do
         let estimatedY = linear (initialA, initialB) (asTensor(x :: Float))
