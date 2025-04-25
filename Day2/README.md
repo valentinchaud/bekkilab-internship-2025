@@ -78,4 +78,6 @@ Correct = 167.0
 Estimated = 179.02368
 
 Got that after final training :
-Epoch 15000: Slope (a)=0.5553, Intercept (b)=94.5853, Cost=1117.3942
+Epoch 995468: Slope (a)=0.5592, Intercept (b)=93.8070, Cost=1117.4471 (corrected it because in my first training I had the good values as initial values.... )
+
+I guess there is a problem with one of my functions, because I need to do around 1 million epoch before approaching the good values. But if I put a learning rate more than 28e-6, I diverge to + infinity. 
