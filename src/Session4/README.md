@@ -25,7 +25,27 @@ Final perceptronTensor Float [4,1] [[ 1.0000   ],
                     [ 0.0000]]
 Final errorTensor Float []  0.0000
 ```
-We can see that we go from 3 to 0 error value, so the code seems to work. However, I noticed after some executions that
-I don't have everytime the correct values for the perceptron : sometimes I still have errors at the end.
+We can see that we go from 3 to 0 error value, so the code seems to work well after 60 epochs. 
 There is also a problem with the calculation of my error, because I don't apply the absolute value the sum of the error 
 can lead to a false 0 error at the end, which can stop the training before the end.
+
+
+## Part 2 : MlpXOR.hs 
+
+The first code uses MLPSpec for specifying the activation function and the number of neurons per layers. MLP contains
+the linear layers themselves. The MLP function do the forward pass part by applying the weights and bias, then the activation 
+function (here tanh). The main code generate random datas for the input of the xor gate, then apply mlp function to do the 
+forward propagation, before calculating the loss and using gradiant descent to the model's state (backpropagation part).
+It then updates weights and bias accordingly before going again until the model is optimized.
+
+The second code uses sigmoid instead of the tanh function. In the second code, we don't generate random datas for the input,
+and we calculate the loss in the entire trainingData instead, similarly to what I done for the loss calculation in my simple
+perceptron. It also uses CUDA, that will probably lead to better performance as it can use optimized operations for Nvidia GPUs.
+
+Using different activation function can lead to different results. For example, the step function won't work well because
+the gradient descent uses partial differentiation, but the derivate of 0 and 1 is 0, so the weights won't update because of that, and
+the learning will stop.
+
+Others functions will work. The main difference between sigmoid and tanh is that tanh will converge faster due to being centered
+in 0. These two functions however has the main problem of the vanishing gradient : because the gradient can go to smaller and smaller values, 
+we can have the same problem than the step function, i.e gradient going to zero and stopping the learning.
