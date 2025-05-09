@@ -28,6 +28,7 @@ library
       Lib
       Session3.LinearRegression
       Session3.Main
+      Session4.PerceptronAndGate
   other-modules:
       Paths_ochanomizu_internship
   autogen-modules:
@@ -62,12 +63,32 @@ executable session3-linear-regression
   other-modules:
       Lib
       Session3.LinearRegression
+      Session4.PerceptronAndGate
       Paths_ochanomizu_internship
   autogen-modules:
       Paths_ochanomizu_internship
   hs-source-dirs:
       src
-  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N -main-is Session3.Main
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-reports=-N -main-is Session3.Main
+  build-depends:
+      base >=4.7 && <5
+    , hasktorch
+    , hasktorch-tools
+    , ochanomizu-internship
+  default-language: Haskell2010
+
+executable session4
+  main-is: Session4/PerceptronAndGate.hs
+  other-modules:
+      Lib
+      Session3.LinearRegression
+      Session3.Main
+      Paths_ochanomizu_internship
+  autogen-modules:
+      Paths_ochanomizu_internship
+  hs-source-dirs:
+      src
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N -main-is Session4.PerceptronAndGate -main-is Session4.PerceptronAndGate
   build-depends:
       base >=4.7 && <5
     , hasktorch
