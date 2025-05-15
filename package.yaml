@@ -23,6 +23,10 @@ dependencies:
 - base >= 4.7 && < 5
 - hasktorch
 - hasktorch-tools
+- cassava
+- bytestring
+- vector
+- nlp-tools
 ghc-options:
 - -Wall
 - -Wcompat
@@ -66,6 +70,38 @@ executables:
       - -main-is Session4.PerceptronAndGate
     dependencies:
       - ochanomizu-internship
+  session5:
+    main: Session5.Main
+    source-dirs: src
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+      - -main-is Session5.Main
+    dependencies:
+      - ochanomizu-internship
+  session5-admit:
+    main: Session5.Admit
+    source-dirs: src
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+      - -main-is Session5.Admit
+    dependencies:
+      - ochanomizu-internship
+  session5-admit-nll:
+    main: Session5.AdmitNLL
+    source-dirs: src
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+      - -main-is Session5.AdmitNLL
+    dependencies:
+      - ochanomizu-internship
+
+
 
 
 tests:
