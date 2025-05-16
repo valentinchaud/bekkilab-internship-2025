@@ -140,8 +140,8 @@ main = do
         predContinuous = mlpLayer trainedModel tensorInput
         predictedContinuousValue = asValue predContinuous :: Float
         predictedBinaryValue = if predictedContinuousValue > threshold then 1 else 0
-        actual      = chanceOfAdmit applicant -- This is continuous
-        actualBinary = if actual > realToFrac threshold then 1 else 0 -- Binary actual for comparison
+        actual      = chanceOfAdmit applicant
+        actualBinary = if actual > realToFrac threshold then 1 else 0
     putStrLn $ "Predicted (continu): " ++ show predictedContinuousValue ++ " | Predicted (binaire): " ++ show predictedBinaryValue ++ " | Real (continu): " ++ show actual ++ " | Real (binaire): " ++ show actualBinary
 
   putStrLn "\n✅ Training model finished !"
