@@ -100,6 +100,28 @@ executables:
       - -main-is Session5.AdmitNLL
     dependencies:
       - ochanomizu-internship
+  session5-titanic-data:
+    main: Session5.DataTitanic
+    source-dirs: src
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+      - -main-is Session5.DataTitanic
+    dependencies:
+      - ochanomizu-internship
+  session5-titanic-train:
+    main: Session5.TitanicTrain
+    source-dirs: src
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+      - -main-is Session5.TitanicTrain
+    dependencies:
+      - ochanomizu-internship
+
+
 
 
 
