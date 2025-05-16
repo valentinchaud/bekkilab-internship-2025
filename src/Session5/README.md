@@ -50,16 +50,16 @@ Macro-F1 Score : 0.45945945945945943
 Weighted-F1 Score : 0.7810810810810811
 
 🔎 Predictions on valid.csv :
-Predicted (continu): 0.79246664 | Predicted (binaire): 1 | Real (continu): 0.75 | Real (binaire): 1
-Predicted (continu): 0.78491944 | Predicted (binaire): 1 | Real (continu): 0.73 | Real (binaire): 1
-Predicted (continu): 0.75932884 | Predicted (binaire): 1 | Real (continu): 0.72 | Real (binaire): 1
-Predicted (continu): 0.7460907 | Predicted (binaire): 1 | Real (continu): 0.62 | Real (binaire): 1
-Predicted (continu): 0.7593628 | Predicted (binaire): 1 | Real (continu): 0.67 | Real (binaire): 1
-Predicted (continu): 0.80079746 | Predicted (binaire): 1 | Real (continu): 0.81 | Real (binaire): 1
-Predicted (continu): 0.75889957 | Predicted (binaire): 1 | Real (continu): 0.63 | Real (binaire): 1
-Predicted (continu): 0.7567816 | Predicted (binaire): 1 | Real (continu): 0.69 | Real (binaire): 1
-Predicted (continu): 0.8070211 | Predicted (binaire): 1 | Real (continu): 0.8 | Real (binaire): 1
-Predicted (continu): 0.7410568 | Predicted (binaire): 1 | Real (continu): 0.43 | Real (binaire): 0
+Predicted (continu): 0.79246664 | Predicted (binary): 1 | Real (continu): 0.75 | Real (binary): 1
+Predicted (continu): 0.78491944 | Predicted (binary): 1 | Real (continu): 0.73 | Real (binary): 1
+Predicted (continu): 0.75932884 | Predicted (binary): 1 | Real (continu): 0.72 | Real (binary): 1
+Predicted (continu): 0.7460907 | Predicted (binary): 1 | Real (continu): 0.62 | Real (binary): 1
+Predicted (continu): 0.7593628 | Predicted (binary): 1 | Real (continu): 0.67 | Real (binary): 1
+Predicted (continu): 0.80079746 | Predicted (binary): 1 | Real (continu): 0.81 | Real (binary): 1
+Predicted (continu): 0.75889957 | Predicted (binary): 1 | Real (continu): 0.63 | Real (binary): 1
+Predicted (continu): 0.7567816 | Predicted (binary): 1 | Real (continu): 0.69 | Real (binary): 1
+Predicted (continu): 0.8070211 | Predicted (binary): 1 | Real (continu): 0.8 | Real (binary): 1
+Predicted (continu): 0.7410568 | Predicted (binary): 1 | Real (continu): 0.43 | Real (binary): 0
 ```
 ![graph-loss.png](../../graph-loss.png)
 
