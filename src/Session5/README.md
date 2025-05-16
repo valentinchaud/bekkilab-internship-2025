@@ -83,6 +83,10 @@ The main use cases for NLL are for classification, for calculating the probabili
 classification) or the multiple different classes (for multiclass classification). It's also used in generative models, 
 which are maximizing the likelihood of the data, which is equivalent of minimizing the NLL.
 
+Here is an attempt of adapting the Admit dataset to NLL :
+
+![graph-loss-nll.png](../../graph-loss-nll.png)
+
 ## Cross-entropy loss
 
 Entropy has been defined by Claude Shannon as : 
@@ -103,6 +107,7 @@ where P(x) is the true probability of the event x, and Q(x) the probability of t
 A lower cross-entropy value signifies a better model performance, because the predicted values are close to the true 
 values. The cross-entropy is also widely used in classification.
 
+
 ## Kullback-Leiber divergence
 
 The Kullback-Leiber divergence quantifies how a probability distribution P (for example in classification, the true 
@@ -113,4 +118,10 @@ gradients methods like Trust Region Policy Optimization or Proximal Policy Optim
 policy between updates for keeping a stability in the learning process. Another use case is for Variational Autoencoders,
 for regularizing the loss functions of VAEs.
 
+# Titanic dataset
 
+I unfortunately didn't have the time to finish Titanic training. I tried to preprocess the datas, and it seems to work, 
+but I didn't manage to change the things needed for adapting to the new dataset.
+
+Here is the learning curve I had for reference :
+![graph-loss-titanic.png](../../graph-loss-titanic.png)
