@@ -1,3 +1,68 @@
+
+
+# Evaluation metrics 
+
+```text 
+
+Epoc:    1  --->  Loss: 0.023489
+Epoc:    2  --->  Loss: 0.022464
+Epoc:    3  --->  Loss: 0.025927
+Epoc:    4  --->  Loss: 0.030345
+Epoc:    5  --->  Loss: 0.029796
+Epoc:    6  --->  Loss: 0.024198
+Epoc:    7  --->  Loss: 0.022914
+Epoc:    8  --->  Loss: 0.022922
+Epoc:    9  --->  Loss: 0.022733
+Epoc:   10  --->  Loss: 0.022194
+Epoc:   11  --->  Loss: 0.022033
+Epoc:   12  --->  Loss: 0.021790
+Epoc:   13  --->  Loss: 0.021544
+Epoc:   14  --->  Loss: 0.021313
+Epoc:   15  --->  Loss: 0.019735
+Epoc:   16  --->  Loss: 0.023229
+Epoc:   17  --->  Loss: 0.021898
+Epoc:   18  --->  Loss: 0.019649
+Epoc:   19  --->  Loss: 0.020257
+Epoc:   20  --->  Loss: 0.019829
+Epoc:   21  --->  Loss: 0.019712
+Epoc:   22  --->  Loss: 0.019589
+Epoc:   23  --->  Loss: 0.019436
+Epoc:   24  --->  Loss: 0.019274
+Epoc:   25  --->  Loss: 0.019086
+Epoc:   26  --->  Loss: 0.019154
+Epoc:   27  --->  Loss: 0.019034
+Epoc:   28  --->  Loss: 0.018527
+Epoc:   29  --->  Loss: 0.018382
+Epoc:   30  --->  Loss: 0.018455
+
+📊 Loss on eval.csv (MSE) : 2.459427e-2
+
+📈 Eval metrics on eval.csv :
+Confusion matrix :
+Tensor Int64 [2,2] [[ 34,  0],
+                    [ 6,  0]]
+Accuracy : 0.85
+Precision : 0.85
+Recall : 1.0
+F1 Score (Per Class) - Positive: 0.9189189189189189, Negative: 0.0
+Micro-F1 Score : 0.9189189189189189
+Macro-F1 Score : 0.45945945945945943
+Weighted-F1 Score : 0.7810810810810811
+
+🔎 Predictions on valid.csv :
+Predicted (continu): 0.79246664 | Predicted (binaire): 1 | Real (continu): 0.75 | Real (binaire): 1
+Predicted (continu): 0.78491944 | Predicted (binaire): 1 | Real (continu): 0.73 | Real (binaire): 1
+Predicted (continu): 0.75932884 | Predicted (binaire): 1 | Real (continu): 0.72 | Real (binaire): 1
+Predicted (continu): 0.7460907 | Predicted (binaire): 1 | Real (continu): 0.62 | Real (binaire): 1
+Predicted (continu): 0.7593628 | Predicted (binaire): 1 | Real (continu): 0.67 | Real (binaire): 1
+Predicted (continu): 0.80079746 | Predicted (binaire): 1 | Real (continu): 0.81 | Real (binaire): 1
+Predicted (continu): 0.75889957 | Predicted (binaire): 1 | Real (continu): 0.63 | Real (binaire): 1
+Predicted (continu): 0.7567816 | Predicted (binaire): 1 | Real (continu): 0.69 | Real (binaire): 1
+Predicted (continu): 0.8070211 | Predicted (binaire): 1 | Real (continu): 0.8 | Real (binaire): 1
+Predicted (continu): 0.7410568 | Predicted (binaire): 1 | Real (continu): 0.43 | Real (binaire): 0
+```
+![graph-loss.png](../../graph-loss.png)
+
 # Survey about loss functions
 
 ## Negative Loss Likelihood
