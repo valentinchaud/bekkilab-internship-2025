@@ -9,18 +9,16 @@ import Prelude
 import Control.Monad (forM, forM_, foldM,when)
 import qualified Data.Vector as V
 
--- hasktorch
-import Torch.Tensor (asValue, Tensor, asTensor, toCPU) -- Added gt, toCPU, asTensor
-import Torch.Functional (mseLoss, toDType,gt,nllLoss') -- MODIFIED: Added toDType, removed round
+import Torch.Tensor (asValue, Tensor, asTensor, toCPU)
+import Torch.Functional (mseLoss, toDType,gt,nllLoss')
 import Torch.Device (Device(..), DeviceType(..))
 import Torch.NN (sample, flattenParameters)
 import Torch.Optim (mkAdam)
 import Torch.Train (update, showLoss)
 import Torch.Layer.MLP (MLPHypParams(..), ActName(..), mlpLayer)
 import Torch.Tensor.TensorFactories (asTensor'')
-import Torch.DType (DType(Bool, Float)) -- Added Bool and Float DTypes
+import Torch.DType (DType(Bool, Float))
 
--- local (ton module d'import CSV & conversion)
 import Session5.Data
   ( Applicant(..)
   , chanceOfAdmit
@@ -30,10 +28,8 @@ import Session5.Data
   , createBatches
   )
 
--- courbe d'apprentissage
 import ML.Exp.Chart (drawLearningCurve)
 
--- evaluation metrics
 import Session5.Evaluation
   ( confusionMatrix
   , accuracy
@@ -52,25 +48,20 @@ main = do
       hypParams = MLPHypParams device 7 [(16, Relu), (16, Relu), (1, Sigmoid)]
       lrVal     = 2e-3 :: Float
       lrTensor  = asTensor'' device [lrVal]
-      threshold = 0.5 :: Float -- Define a threshold for binary classification
+      threshold = 0.5 :: Float
 
-  -- Chargement des données
   Right trainData <- loadData "data/train.csv"
   Right evalData  <- loadData "data/eval.csv"
   Right validData <- loadData "data/valid.csv"
 
-  -- Création des mini-batches (sans shuffle)
   let trainBatches = createBatches batchSize trainData
 
-  -- Tenseurs d'évaluation
   let xEval = dataToTensor evalData
-      yEvalContinuous = targetToTensor evalData -- Continuous target values (0.0 to 1.0)
+      yEvalContinuous = targetToTensor evalData
 
-  -- Convert continuous yEval to binary based on the threshold for evaluation purposes
-  let yEvalBool = gt yEvalContinuous (asTensor threshold) -- yEvalBool is a Bool Tensor
+  let yEvalBool = gt yEvalContinuous (asTensor threshold)
 
 
-  -- Initialisation du modèle et optimiseur
   initModel <- sample hypParams
   let initOptim = mkAdam 0 0.9 0.999 (flattenParameters initModel)
 
@@ -99,7 +90,7 @@ main = do
 
   let yEvalPredContinuous = mlpLayer trainedModel xEval
       evalLoss = asValue (mseLoss yEvalContinuous yEvalPredContinuous) :: Float
-  putStrLn $ "\n📊 Loss sur eval.csv (MSE) : " ++ show evalLoss
+  putStrLn $ "\n📊 Loss on eval.csv (MSE) : " ++ show evalLoss
 
   let yEvalPredBool = gt yEvalPredContinuous (asTensor threshold)
 
@@ -107,10 +98,10 @@ main = do
       yEvalFloat     = Torch.Functional.toDType Torch.DType.Float yEvalBool
 
 
-  putStrLn "\n📈 Métriques d'évaluation sur eval.csv :"
+  putStrLn "\n📈 Eval metrics on eval.csv :"
 
   let confMatrix = confusionMatrix yEvalPredFloat yEvalFloat
-  putStrLn $ "Matrice de Confusion :\n" ++ show confMatrix
+  putStrLn $ "Confusion matrix :\n" ++ show confMatrix
 
   let acc = accuracy yEvalPredFloat yEvalFloat
   putStrLn $ "Accuracy : " ++ show acc
@@ -134,7 +125,7 @@ main = do
   putStrLn $ "Weighted-F1 Score : " ++ show weightedF1
 
 
-  putStrLn "\n🔎 Prédictions sur valid.csv (quelques exemples) :"
+  putStrLn "\n🔎 Predictions on valid.csv :"
   forM_ (V.toList $ V.take 10 validData) $ \applicant -> do
     let input :: [Float]
         input = [ fromIntegral (greScore applicant)
@@ -151,6 +142,6 @@ main = do
         predictedBinaryValue = if predictedContinuousValue > threshold then 1 else 0
         actual      = chanceOfAdmit applicant -- This is continuous
         actualBinary = if actual > realToFrac threshold then 1 else 0 -- Binary actual for comparison
-    putStrLn $ "Prévu (continu): " ++ show predictedContinuousValue ++ " | Prévu (binaire): " ++ show predictedBinaryValue ++ " | Réel (continu): " ++ show actual ++ " | Réel (binaire): " ++ show actualBinary
+    putStrLn $ "Predicted (continu): " ++ show predictedContinuousValue ++ " | Predicted (binaire): " ++ show predictedBinaryValue ++ " | Real (continu): " ++ show actual ++ " | Real (binaire): " ++ show actualBinary
 
-  putStrLn "\n✅ Modèle entraîné et évalué avec succès !"
+  putStrLn "\n✅ Training model finished !"

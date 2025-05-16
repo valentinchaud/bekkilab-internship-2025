@@ -18,9 +18,8 @@ import Torch.Optim (mkAdam)
 import Torch.Train (update, showLoss)
 import Torch.Layer.MLP (MLPHypParams(..), ActName(..), mlpLayer)
 import Torch.Tensor.TensorFactories (asTensor'')
-import Torch.DType (DType(Bool, Float,Int64)) -- Added Bool and Float DTypes
+import Torch.DType (DType(Bool, Float,Int64))
 
--- local (ton module d'import CSV & conversion)
 import Session5.Data
   ( Applicant(..)
   , chanceOfAdmit
@@ -52,23 +51,19 @@ main = do
       hypParams = MLPHypParams device 7 [(16, Relu), (16, Relu), (2, Id)]
       lrVal     = 2e-3 :: Float
       lrTensor  = asTensor'' device [lrVal]
-      threshold = 0.5 :: Float -- Define a threshold for binary classification
+      threshold = 0.5 :: Float
 
-  -- Chargement des données
   Right trainData <- loadData "data/train.csv"
   Right evalData  <- loadData "data/eval.csv"
   Right validData <- loadData "data/valid.csv"
 
-  -- Création des mini-batches (sans shuffle)
   let trainBatches = createBatches batchSize trainData
 
-  -- Tenseurs d'évaluation
   let xEval = dataToTensor evalData
       yEvalContinuous = targetToTensor evalData -- Continuous target values (0.0 to 1.0)
       yEvalTargetIndices = squeezeAll $ Torch.Functional.toDType Int64 (gt yEvalContinuous (asTensor threshold))
 
 
-  -- Initialisation du modèle et optimiseur
   initModel <- sample hypParams
   let initOptim = mkAdam 0 0.9 0.999 (flattenParameters initModel)
 
@@ -100,7 +95,7 @@ main = do
   let yEvalPredLogits = mlpLayer trainedModel xEval -- Shape: [numEvalSamples, 2]
       yEvalPredLogProbs = logSoftmax (Dim 1) yEvalPredLogits
       evalLoss = asValue (nllLoss' yEvalTargetIndices yEvalPredLogProbs) :: Float -- Ensure yEvalTargetIndices is LongTensor and squeezed
-  putStrLn $ "\n📊 Loss sur eval.csv (NLLoss) : " ++ show evalLoss
+  putStrLn $ "\n📊 Loss on eval.csv (NLLoss) : " ++ show evalLoss
 
   let yEvalPredIndices = argmax (Dim 1) RemoveDim yEvalPredLogProbs -- Shape: [numEvalSamples]
 
@@ -108,10 +103,10 @@ main = do
       yEvalFloat     = Torch.Functional.toDType Torch.DType.Float yEvalTargetIndices -- yEvalTargetIndices was already 0 or 1
 
 
-  putStrLn "\n📈 Métriques d'évaluation sur eval.csv :"
+  putStrLn "\n📈 Eval metrics on eval.csv :"
 
   let confMatrix = confusionMatrix yEvalPredFloat yEvalFloat
-  putStrLn $ "Matrice de Confusion :\n" ++ show confMatrix
+  putStrLn $ "Confusion matrix :\n" ++ show confMatrix
 
   let acc = accuracy yEvalPredFloat yEvalFloat
   putStrLn $ "Accuracy : " ++ show acc
@@ -136,7 +131,7 @@ main = do
 
 
 
-  putStrLn "\n🔎 Prédictions sur valid.csv (quelques exemples) :"
+  putStrLn "\n🔎 Predictions on valid.csv :"
   forM_ (V.toList $ V.take 10 validData) $ \applicant -> do
     let input :: [Float]
         input = [ fromIntegral (greScore applicant)
@@ -155,6 +150,6 @@ main = do
         predictedBinaryValue = if predictedContinuousValue > threshold then 1 else 0
         actual      = chanceOfAdmit applicant -- This is continuous
         actualBinary = if actual > realToFrac threshold then 1 else 0 -- Binary actual for comparison
-    putStrLn $ "Prévu (continu): " ++ show predictedContinuousValue ++ " | Prévu (binaire): " ++ show predictedBinaryValue ++ " | Réel (continu): " ++ show actual ++ " | Réel (binaire): " ++ show actualBinary
+    putStrLn $ "Predicted (continu): " ++ show predictedContinuousValue ++ " | Predicted (binaire): " ++ show predictedBinaryValue ++ " | Real (continu): " ++ show actual ++ " | Real (binaire): " ++ show actualBinary
 
-  putStrLn "\n✅ Modèle entraîné et évalué avec succès !"
+  putStrLn "\n✅ Finished to train model !"
