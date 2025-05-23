@@ -27,6 +27,12 @@ dependencies:
 - bytestring
 - vector
 - nlp-tools
+- utf8-string
+- containers
+- random
+- random-shuffle
+- text
+- binary
 ghc-options:
 - -Wall
 - -Wcompat
@@ -120,6 +126,39 @@ executables:
       - -main-is Session5.TitanicTrain
     dependencies:
       - ochanomizu-internship
+  session6-word2vec:
+    main: Session6.WordToVec
+    source-dirs: src
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+      - -main-is Session6.WordToVec
+    dependencies:
+      - ochanomizu-internship
+  session6-word2vec-save:
+    main: Session6.WordToVecSave
+    source-dirs: src
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+      - -main-is Session6.WordToVecEmbedSave
+    dependencies:
+      - ochanomizu-internship
+  session6-word2vec-embedtest:
+    main: Session6.WordToVecEmbedTest
+    source-dirs: src
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+      - -main-is Session6.WordToVecEmbedTest
+    dependencies:
+      - ochanomizu-internship
+
+
+
 
 
 
